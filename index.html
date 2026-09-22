@@ -468,8 +468,7 @@
     <script>
         let allData = [];
 
-        // Load and parse CSV file
-        // Load and parse CSV file (with cache-busting)
+// Load and parse CSV file (with cache-busting)
 Papa.parse('register.csv?v=' + new Date().getTime(), {
     download: true,
     header: true,
