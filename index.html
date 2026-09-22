@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physiotherapy Day Fun Run-2026 Register List</title>
+    <!-- PapaParse for reading CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #00b894;
+            --secondary-color: #0984e3;
+            --accent-color: #fdcb6e;
+            --dark-color: #2d3436;
+            --light-bg: #f7fbf9;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px 10px; 
+            background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 100%);
+            color: #2d3436;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header Banner */
+        header {
+            text-align: center;
+            background: linear-gradient(135deg, #0984e3, #00b894, #6c5ce7);
+            background-size: 200% 200%;
+            animation: gradientBG 8s ease infinite;
+            color: white;
+            padding: 35px 20px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .brand-badge {
+            background-color: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-title-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header-icon {
+            font-size: 32px;
+        }
+
+        h1 { 
+            margin: 0; 
+            font-size: 28px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        p.subtitle {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .owner-tag {
+            margin-top: 10px;
+            font-size: 13px;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        /* Decorative Banner Graphics */
+        .decor-icons {
+            margin-top: 15px;
+            font-size: 22px;
+            letter-spacing: 8px;
+        }
+
+        /* Search Section */
+        .search-container { 
+            text-align: center; 
+            margin-bottom: 25px; 
+        }
+
+        .search-box {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        input[type="text"] { 
+            width: 100%; 
+            padding: 14px 22px; 
+            font-size: 16px; 
+            border: 2px solid var(--primary-color); 
+            border-radius: 30px; 
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus {
+            box-shadow: 0 6px 18px rgba(0, 184, 148, 0.25);
+            border-color: var(--secondary-color);
+        }
+
+        /* Table Styling */
+        .table-container { 
+            overflow-x: auto; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: var(--card-shadow); 
+            padding: 5px;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 900px; 
+        }
+
+        th, td { 
+            padding: 15px 16px; 
+            text-align: left; 
+            border-bottom: 1px solid #edf2f7; 
+            vertical-align: middle;
+        }
+
+        th { 
+            background: linear-gradient(90deg, #00b894, #0984e3); 
+            color: white; 
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.8px;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fcfefe;
+        }
+
+        tr:hover { 
+            background-color: #e3fcef; 
+        }
+
+        /* Badges & Buttons */
+        .badge-bib {
+            background-color: #dfe6e9;
+            color: #2d3436;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .badge-size {
+            background-color: #ffeaa7;
+            color: #d63031;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .badge-distance {
+            background-color: #e17055;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .btn-ticket {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-ticket:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+        }
+
+        .no-result {
+            text-align: center;
+            padding: 30px;
+            color: #636e72;
+            font-size: 16px;
+            display: none;
+        }
+
+        /* Footer / Copyright */
+        footer {
+            margin-top: 35px;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #636e72;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        footer strong {
+            color: var(--dark-color);
+        }
+
+        /* Print Modal Layout */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #ticketView, #ticketView * {
+                visibility: visible;
+            }
+            #ticketView {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                display: block !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Modal Background */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 16px;
+            width: 85%;
+            max-width: 650px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #b2bec3;
+        }
+        .close-btn:hover { color: #2d3436; }
+
+        /* Ticket Card Design */
+        .ticket-card {
+            border: 3px dashed var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .ticket-header h2 {
+            margin: 5px 0;
+            color: var(--secondary-color);
+            font-size: 20px;
+        }
+
+        .ticket-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-field span {
+            display: block;
+            font-size: 11px;
+            color: #b2bec3;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .ticket-field strong {
+            font-size: 16px;
+            color: #2d3436;
+        }
+
+        .ticket-footer {
+            border-top: 1px solid #edf2f7;
+            padding-top: 12px;
+            font-size: 11px;
+            color: #636e72;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .print-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-print-now {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-print-now:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand-badge">⚡ Powered by Swal-Sone Service</div>
+            <div class="header-title-box">
+                <span class="header-icon">🏃‍♀️</span>
+                <h1>Physiotherapy Day Fun Run-2026 Register List</h1>
+                <span class="header-icon">🧘‍♂️</span>
+            </div>
+            <p class="subtitle">Official Participant Registration Database</p>
+            <div class="owner-tag">Owner: John Smith</div>
+            <div class="decor-icons">🏃‍♂️ 👟 🎽 🏅 🩺 🦽 💚</div>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" onkeyup="searchByName()" placeholder="🔍 Name (အမည်) ဖြင့်သာ ရှာဖွေပါ...">
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>BIB</th>
+                        <th>LuckyDraw Sticker</th>
+                        <th>Name</th>
+                        <th>T-Shirt Size</th>
+                        <th>Distance</th>
+                        <th>Reg Source</th>
+                        <th>Print Ticket</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+            <div id="noResult" class="no-result">❌ ရှာဖွေသော Name (အမည်) နှင့် ကိုက်ညီသည့် မှတ်တမ်း မတွေ့ရှိပါ။</div>
+        </div>
+
+        <footer>
+            <div>Organized & Managed by <strong>Swal-Sone Service</strong> | Owner: <strong>John Smith</strong></div>
+            <div style="margin-top: 5px;">© 2026 Physiotherapy Day Fun Run. All Rights Reserved.</div>
+        </footer>
+    </div>
+
+    <!-- Ticket Print Modal -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div id="ticketView" class="ticket-card">
+                <div class="ticket-header">
+                    <div style="font-size: 11px; color: #00b894; font-weight: bold; letter-spacing: 1px;">SWAL-SONE SERVICE PRESENTS</div>
+                    <h2>🏃‍♀️ Physiotherapy Day Fun Run-2026</h2>
+                    <div style="font-size: 13px; color: #636e72;">Official Registration Ticket</div>
+                </div>
+
+                <div class="ticket-body">
+                    <div class="ticket-field">
+                        <span>Runner Name</span>
+                        <strong id="tName">-</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>BIB Number</span>
+                        <strong id="tBib">-</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>LuckyDraw Sticker</span>
+                        <strong id="tLucky">-</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>T-Shirt Size</span>
+                        <strong id="tSize">-</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Distance</span>
+                        <strong id="tDistance">-</strong>
+                    </div>
+                    <div class="ticket-field">
+                        <span>Reg Source</span>
+                        <strong id="tSource">-</strong>
+                    </div>
+                </div>
+
+                <div class="ticket-footer">
+                    <div>Service: Swal-Sone Service</div>
+                    <div>Owner: John Smith</div>
+                </div>
+            </div>
+
+            <div class="print-actions no-print">
+                <button class="btn-print-now" onclick="window.print()">🖨️ Print Ticket / Save PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+
+        // Load and parse CSV file
+        Papa.parse('register.csv', {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                allData = results.data;
+                let tbody = document.getElementById('tableBody');
+                
+                if (allData.length > 0) {
+                    allData.forEach((row, index) => {
+                        let tr = document.createElement('tr');
+                        
+                        tr.innerHTML = `
+                            <td><span class="badge-bib">${row.BIB || '-'}</span></td>
+                            <td><strong>${row['LuckyDraw Sticker'] || '-'}</strong></td>
+                            <td class="name-cell"><strong>${row.Name || '-'}</strong></td>
+                            <td><span class="badge-size">${row['T-Shirt Size'] || '-'}</span></td>
+                            <td><span class="badge-distance">${row.Distance || '-'}</span></td>
+                            <td>${row['Reg Source'] || '-'}</td>
+                            <td>
+                                <button class="btn-ticket" onclick="openTicket(${index})">🎟️ Print Ticket</button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            }
+        });
+
+        // Search STRICTLY by Name only
+        function searchByName() {
+            let input = document.getElementById("searchInput").value.toUpperCase().trim();
+            let trs = document.getElementById("tableBody").getElementsByTagName("tr");
+            let hasMatch = false;
+
+            for (let i = 0; i < trs.length; i++) {
+                let nameCell = trs[i].querySelector('.name-cell');
+                if (nameCell) {
+                    let nameText = nameCell.textContent || nameCell.innerText;
+                    if (nameText.toUpperCase().indexOf(input) > -1) {
+                        trs[i].style.display = "";
+                        hasMatch = true;
+                    } else {
+                        trs[i].style.display = "none";
+                    }
+                }
+            }
+
+            document.getElementById("noResult").style.display = hasMatch ? "none" : "block";
+        }
+
+        // Open Ticket Modal
+        function openTicket(index) {
+            let runner = allData[index];
+            if(!runner) return;
+
+            document.getElementById('tName').textContent = runner.Name || '-';
+            document.getElementById('tBib').textContent = runner.BIB || '-';
+            document.getElementById('tLucky').textContent = runner['LuckyDraw Sticker'] || '-';
+            document.getElementById('tSize').textContent = runner['T-Shirt Size'] || '-';
+            document.getElementById('tDistance').textContent = runner.Distance || '-';
+            document.getElementById('tSource').textContent = runner['Reg Source'] || '-';
+
+            document.getElementById('ticketModal').style.display = 'block';
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('ticketModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            let modal = document.getElementById('ticketModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
